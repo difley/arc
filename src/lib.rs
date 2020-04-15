@@ -3,7 +3,6 @@ extern crate approx;
 
 use approx::AbsDiffEq;
 use approx::RelativeEq;
-use approx::UlpsEq;
 use std::f32;
 
 #[derive(Debug, PartialEq)]
@@ -50,6 +49,9 @@ mod tests {
     #[test]
     fn line_point_doesnt_explode() {
         let my_point = Point { x: 2., y: 3. };
-        abs_diff_eq!(line_point(&my_point, &0.4, &2., &1.), Point {x: 1., y: 2.}, epsilon = f32::EPSILON);
+        let calculated_point = line_point(&my_point, &0.4, &2., &1.);
+        println!("my_point: {:?}", &my_point);
+        println!("calculated_point: {:?}", &calculated_point);
+        assert_abs_diff_eq!(calculated_point, Point {x: 3.842122, y: 3.7788367})
     }
 }
